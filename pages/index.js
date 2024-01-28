@@ -3,17 +3,19 @@ import dbConnect from '../lib/dbConnect'
 import Pet from '../models/Pet'
 //import Creator from '../models/Creators'
 
-const Index = ({ creators }) => (
+const Index = ({ pets }) => (
   <>
     {/* Create a card for each pet */}
     {pets.map((pet) => (
       <div key={pet._id}>
         <div className="card">
-          <img src={pet.image} />
+          <img src={pet.image_url} />
           <h5 className="pet-name">{pet.name}</h5>
           <div className="main-content">
             <p className="pet-name">{pet.name}</p>
-
+            <p className="pet-name">{pet.owner_name}</p>
+            <p className="pet-name">{pet.species}</p>
+            <p className="pet-name">{pet.age}</p>
             {/* Extra Pet Info: Likes and Dislikes */}
             <div className="likes info">
               <p className="label">Likes</p>
@@ -27,6 +29,14 @@ const Index = ({ creators }) => (
               <p className="label">Dislikes</p>
               <ul>
                 {pet.dislikes.map((data, index) => (
+                  <li key={index}>{data} </li>
+                ))}
+              </ul>
+            </div>
+            <div className="diet info">
+              <p className="label">Diet</p>
+              <ul>
+                {pet.diet.map((data, index) => (
                   <li key={index}>{data} </li>
                 ))}
               </ul>
@@ -53,7 +63,7 @@ export async function getServerSideProps() {
 
   /* find all the data in our database */
   const result = await Pets.find({})
-  const PEts = result.map((doc) => {
+  const pets = result.map((doc) => {
     const pet = doc.toObject()
     pet._id = creator._id.toString()
     return pet
