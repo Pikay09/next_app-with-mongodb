@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import dbConnect from '../lib/dbConnect'
-// import Pet from '../models/Pet'
-import Creator from '../models/Creators'
+import Pet from '../models/Pet'
+//import Creator from '../models/Creators'
 
 const Index = ({ creators }) => (
   <>
